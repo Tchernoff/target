@@ -1,19 +1,19 @@
 <template>
   <v-app>
     <v-content>
-      <HelloWorld/>
+      <cityAutocomplete/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import cityAutocomplete from './components/cityAutocomplete.vue';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    cityAutocomplete,
   },
 
   data: () => ({

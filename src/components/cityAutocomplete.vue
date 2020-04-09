@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-card-title>
-        {{ title }}
+        Города
       </v-card-title>
       <v-card-text>
         <v-autocomplete
@@ -10,15 +10,17 @@
           v-model="selectedItems"
           :loading="loading"
           :error-messages="errorMessages"
-          :error="error"
+          :error="errorMessages !== 0"
+          hide-no-data
+          hide-selected
           :items="itemList"
           item-text="name"
-          item-value="name"
-          :label="label"
-          :persistent-hint='loading'
-          :prepend-icon="icon"
+          item-value="cid"
+          label="Города России"
+          prepend-icon="mdi-city"
           chips
           multiple
+          placeholder="Начните вводить название города"
         >
           <template v-slot:selection="selectedItems">
             <v-chip
@@ -37,42 +39,18 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex';
 
 export default {
-  name: 'HelloWorld',
-  // computed: mapState([
-  //   'title',
-  //   'label',
-  //   'placeholder',
-  //   'icon',
-  //   'itemList',
-  //   'error',
-  //   'errorMessages',
-  //   'loading',
-  //   'selected',
-  // ]),
+  name: 'cityAutocomplete',
   computed: {
-    title() {
-      return this.$store.state.citySelection.title;
-    },
-    label() {
-      return this.$store.state.citySelection.label;
-    },
     placeholder() {
       return this.$store.state.citySelection.placeholder;
-    },
-    icon() {
-      return this.$store.state.citySelection.icon;
     },
     itemList() {
       return this.$store.state.citySelection.itemList;
     },
     errorMessages() {
       return this.$store.state.citySelection.errorMessages;
-    },
-    error() {
-      return this.$store.state.citySelection.error;
     },
     loading() {
       return this.$store.state.citySelection.loading;
@@ -88,12 +66,9 @@ export default {
   },
   methods: {
     search() {
-      if (this.$store.state.citySelection.itemList.length > 0) return;
-      if (this.$store.state.citySelection.loading) return;
       this.$store.dispatch('loadItemList');
     },
     remove(item) {
-      // this.$store.dispatch('remove');
       this.$store.commit('REMOVE_ITEM', item);
     },
   },
