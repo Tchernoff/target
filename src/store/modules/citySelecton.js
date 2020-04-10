@@ -43,7 +43,7 @@ const mutations = {
     state.selectedItems = selectedItems;
   },
   REMOVE_ITEM(state, item) {
-    const index = state.selectedItems.indexOf(item);
+    const index = state.selectedItems.indexOf(item.cid);
     if (index >= 0) state.selectedItems.splice(index, 1);
   },
 };

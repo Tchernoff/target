@@ -10,7 +10,7 @@
           v-model="selectedItems"
           :loading="loading"
           :error-messages="errorMessages"
-          :error="errorMessages !== 0"
+          :error="errorMessages !== null"
           hide-no-data
           hide-selected
           :items="itemList"
@@ -43,9 +43,6 @@
 export default {
   name: 'cityAutocomplete',
   computed: {
-    placeholder() {
-      return this.$store.state.citySelection.placeholder;
-    },
     itemList() {
       return this.$store.state.citySelection.itemList;
     },
